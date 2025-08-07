@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonafide Approval</title>
+</head>
+<body>
+
+<h2>Approve Bonafide Request</h2>
+
+<!-- HOD Signature -->
+<img id="hodImage" src="hod.jpg" alt="HOD Signature" style="display: block; width: 150px;">
+
+<!-- Approve Button -->
+<button id="approveBtn">Approve</button>
+
+<script>
+    // JavaScript function
+    document.getElementById('approveBtn').onclick = function() {
+        const img = document.getElementById('hodImage');
+
+        // Check if the signature image is displayed
+        if (img && img.style.display === 'block') {
+            if (confirm("Are you sure you want to approve this request?")) {
+                let email = 'student@example.com';
+                let subject = 'Bonafide Request Approved';
+                let body = 'Dear Student,\n\nYour Bonafide Certificate request has been approved by the HOD.\n\nThank you!\nGovernment Polytechnic, Yavatmal';
+
+                // Send email using mailto
+                let mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                window.location.href = mailtoLink;
+
+                // Show success alert
+                alert("Request approved successfully! Email has been opened.");
+            }
+        } else {
+            alert('Please sign the application before approving!');
+        }
+    };
+</script>
+
+</body>
+</html>

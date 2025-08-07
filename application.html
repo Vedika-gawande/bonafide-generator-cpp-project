@@ -1,0 +1,49 @@
+<?php
+session_start();
+require 'db.php';
+
+if (!isset($_SESSION['username'])) {
+    echo "<script>alert('You must be logged in to view this page.'); window.location.href='login.php';</script>";
+    exit();
+}
+
+$username = $_SESSION['username'];
+
+// Fetch the latest application request for the logged-in user
+$stmt = $pdo->prepare("SELECT * FROM bonafide_requests WHERE username = ? ORDER BY id DESC LIMIT 1");
+$stmt->execute([$username]);
+$request = $stmt->fetch();
+
+if (!$request) {
+    echo "<script>alert('No application found.'); window.location.href='application.php';</script>";
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1 class="title">Bonafide Certificate Application Details</h1>
+        <div class="application-details">
+            <p><strong>Full Name:</strong> <?php echo htmlspecialchars($request['student_name']); ?></p>
+            <p><strong>Phone Number:</strong> <?php echo htmlspecialchars($request['phone']); ?></p>
+            <p><strong>Enrollment Number:</strong> <?php echo htmlspecialchars($request['enrollment_number']); ?></p>
+            <p><strong>Date of Request:</strong> <?php echo htmlspecialchars($request['date']); ?></p>
+            <p><strong>Branch of Study:</strong> <?php echo htmlspecialchars($request['branch']); ?></p>
+            <p><strong>Academic Year:</strong> <?php echo htmlspecialchars($request['year']); ?></p>
+            <p><strong>Reason for Bonafide Certificate:</strong> <?php echo htmlspecialchars($request['reason']); ?></p>
+            <p><strong>Email Address:</strong> <?php echo htmlspecialchars($request['email']); ?></p>
+            <p><strong>Current Location:</strong> <?php echo htmlspecialchars($request['location']); ?></p>
+            <p><strong>Status:</strong> <?php echo htmlspecialchars($request['status']); ?></p>
+        </div>
+        <a href="application.php" class="back-btn">Back to Application Form</a>
+    </div>
+</body>
+</html>

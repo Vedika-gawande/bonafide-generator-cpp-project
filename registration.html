@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bonafide Certificate Request Form</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Function to toggle the "Other" reason input visibility
+    function toggleOtherReason() {
+      const reasonDropdown = document.getElementById('reason');
+      const otherReasonField = document.getElementById('other-reason');
+      if (reasonDropdown.value === 'Other') {
+        otherReasonField.style.display = 'block';
+      } else {
+        otherReasonField.style.display = 'none';
+      }
+    }
+
+      // Function to handle the form submission and save data to localStorage
+        // Function to handle the form submission and save data to localStorage
+        function generateApplication() {
+          const name = document.getElementById('name').value;
+          const phone = document.getElementById('phone').value;
+          const enrollment = document.getElementById('enrollment').value;
+          const date = document.getElementById('date').value;
+          const branch = document.getElementById('branch').value;
+          const year = document.getElementById('year').value;
+          const reason = document.getElementById('reason').value === 'Other'
+                          ? document.getElementById('other-reason-text').value
+                          : document.getElementById('reason').value;
+          const email = document.getElementById('email').value;
+          const location = document.getElementById('location').value;
+          const username = localStorage.getItem('loggedInUser'); // Get logged-in user
+      
+          // Create an object to store the applicant data
+          const applicantData = {
+            name: name,
+            phone: phone,
+            enrollment: enrollment,
+            date: date,
+            branch: branch,
+            year: year,
+            reason: reason,
+            email: email,
+            location: location,
+            username: username // Include username in the applicant data
+          };
+      
+          // Get existing applications from localStorage
+          let applications = JSON.parse(localStorage.getItem('applications')) || [];
+      
+          // Add the new application to the list
+          applications.push(applicantData);
+      
+          // Store the updated list in localStorage
+          localStorage.setItem('applications', JSON.stringify(applications));
+      
+          // Get the index of the new application
+          const applicationIndex = applications.length - 1;
+      
+          // Redirect to the application page with the application index as a query parameter
+          window.location.href = `application.php?index=${applicationIndex}`;
+        }
+      </script>
+      
+    
+</head>
+<body>
+  <div class="form-container">
+    <h1 class="title">Bonafide Certificate Request Form</h1>
+    <form class="form">
+      <!-- Name Field -->
+      <div class="input-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your full name" required>
+      </div>
+
+      <!-- Phone and Enrollment Number Row -->
+      <div class="input-row">
+        <div class="input-group">
+          <label for="phone">Phone Number</label>
+          <input type="text" id="phone" placeholder="Enter your phone number" required>
+        </div>
+        <div class="input-group">
+          <label for="enrollment">Enrollment Number</label>
+          <input type="text" id="enrollment" placeholder="Enter your enrollment number" required>
+        </div>
+      </div>
+
+      <!-- Date Field -->
+      <div class="input-group">
+        <label for="date">Date of Request</label>
+        <input type="date" id="date" required>
+      </div>
+
+      <!-- Branch and Year Row -->
+      <div class="input-row">
+        <div class="input-group">
+          <label for="branch">Branch of Study</label>
+          <select id="branch" required>
+            <option value="Computer Engineering">Computer Engineering</option>
+            <option value="Mechanical Engineering">Mechanical Engineering</option>
+            <option value="Civil Engineering">Civil Engineering</option>
+            <option value="Electronic Engineering">Electronic Engineering</option>
+            <option value="Electrical Engineering">Electrical Engineering</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="year">Academic Year</label>
+          <select id="year" required>
+            <option value="1st Year">1st Year</option>
+            <option value="2nd Year">2nd Year</option>
+            <option value="3rd Year">3rd Year</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Reason for Bonafide Certificate Dropdown -->
+      <div class="input-group">
+        <label for="reason">Reason for Bonafide Certificate</label>
+        <select id="reason" onchange="toggleOtherReason()" required>
+          <option value="Applying for scholarships">Applying for scholarships</option>
+          <option value="Securing education loans">Securing education loans</option>
+          <option value="Applying for visas">Applying for visas</option>
+          <option value="Hostel Admission">Hostel Admission</option>
+          <option value="Sports and Extracurricular Activities">Sports and Extracurricular Activities</option>
+          <option value="Opening a student Bank Account">Opening a student Bank Account</option>
+          <option value="Proof for Health Insurance">Proof for Health Insurance</option>
+          <option value="Issuance of Government IDs">Issuance of Government IDs</option>
+          <option value="Concession for Public Transport">Concession for Public Transport</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <!-- Other Reason Field -->
+      <div class="input-group" id="other-reason" style="display: none;">
+        <label for="other-reason-text">Specify Other Reason</label>
+        <input type="text" id="other-reason-text" placeholder="Enter your reason">
+      </div>
+
+      <!-- Email and Location Fields -->
+      <div class="input-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email address">
+      </div>
+      <div class="input-group">
+        <label for="location">Current Location</label>
+        <input type="text" id="location" placeholder="Enter your location" required>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="button" class="submit-btn" onclick="generateApplication()">Submit Request</button>
+    </form>
+  </div>
+</body>
+</html>

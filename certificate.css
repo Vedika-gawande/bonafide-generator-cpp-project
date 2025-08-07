@@ -1,0 +1,198 @@
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    margin: 40px;
+    padding-top: 70px; 
+}
+
+
+/* Header styling */
+.new-header {
+background-color: #fff;
+position: fixed;
+width: 100%;
+top: 10px;
+left: 0;
+z-index: 1000;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Outline effect */
+.outline {
+position: absolute;
+inset: 0;
+pointer-events: none;
+}
+
+/* Navigation bar */
+.new-nav {
+position: absolute;
+top: 0px;
+left: 0;
+width: auto;
+height: 60px;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+padding: 8px;
+}
+
+/* Container hover effect */
+.new-container1:hover .outline {
+transition: 999999s;
+stroke-dashoffset: 1;
+stroke-dasharray: 0;
+}
+
+/* Main container */
+.new-container1 {
+position: absolute;
+inset: 0;
+background: transparent;
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+align-items: center;
+padding: 0.5em;
+width: 100%;
+margin: 0 auto;
+padding: 20px;
+}
+
+/* Navigation button */
+.new-btn {
+padding: 0.5em 1.5em;
+color: #021d1a;
+cursor: pointer;
+transition: 0.1s;
+text-decoration: none; /* Remove underline */
+}
+.mechanical-signature {
+display: block;
+width: 150px;
+margin-top: 30px;
+}
+/* Button hover effect */
+.new-btn:hover {
+background: rgb(195, 205, 240);
+color: black; /* Ensure text stays black */
+}
+
+.certificate {
+    width: 800px;
+    margin: auto;
+    border: 2px solid black;
+    padding: 40px;
+    position: relative;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    height: 450px;
+}
+.header img {
+    width: 100px;
+    position: absolute;
+    left: 50px;
+    top: 20px;
+    height: 80px;
+}
+.header {
+    text-align: center;
+}
+.header h2 {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+.header p {
+    margin: 3px 0;
+    font-size: 14px;
+}
+.line {
+    border-bottom: 2px solid black;
+    margin: 10px 0;
+}
+.title {
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-top: 10px;
+}
+.content {
+    text-align: left;
+    font-size: 18px;
+    margin-top: 20px;
+    line-height: 1.8;
+}
+.signature {
+    text-align: center;
+    margin-top: -10px;
+    font-weight: bold;
+    line-height: 0.2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    margin-left: 550px;
+    position: relative;
+}
+.signature img {
+    display: none;
+    width: 120px;
+    margin-top: 30px;
+}
+.stamp {
+    position: absolute;
+    left: -85px;
+    top: 25%;
+    transform: translateY(-50%);
+    width: 60px;
+    display: block;
+}
+
+
+.date {
+    text-align: right;
+    margin-top: -30px;
+}
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color:rgb(123, 61, 217);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn:hover {
+    background-color:rgb(123, 61, 217);
+}
+#signed-text {
+    font-size: 16px;
+    font-style: italic;
+    color: rgb(127, 73, 209);
+    display: none;
+}
+@media print {
+.button-container {
+display: none;
+}
+}
+@media print {
+@page {
+size: A4 landscape;
+margin: 20mm;
+}
+
+body {
+transform: rotate(0deg); /* Prevent accidental rotation */
+margin: 0;
+}
+}
+
